@@ -1,17 +1,21 @@
+import java.util.List;
+
 public abstract class Product {
     private int id; //product id
     private String name;//product name
     private String description;//product description
     private float price;//product price
+    List<Retailer> retailers; //List of possible retailers
 
     private boolean quantityBased;//variable for whether item is quantity or weight based
 
-    public Product(int id, String name, String description, float price, boolean quantityBased) {//constructor
+    public Product(int id, String name, String description, float price, boolean quantityBased, List<Retailer> retailers) {//constructor
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantityBased = quantityBased;
+        this.retailers = retailers;
     }
 
     public int getId() {//get method for id

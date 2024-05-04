@@ -1,8 +1,10 @@
+import java.util.List;
+
 public class Produce extends NonExpired{
     private boolean organic;//variable for whether item is organic
 
-    public Produce(int id, String name, String description, float price, boolean quantityBased, boolean organic) {//constructor
-        super(id, name, description, price, quantityBased);
+    public Produce(int id, String name, String description, float price, boolean quantityBased, boolean organic, List<Retailer> retailers) {//constructor
+        super(id, name, description, price, quantityBased, retailers);
         this.organic = organic;
     }
 

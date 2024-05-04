@@ -1,8 +1,10 @@
+import java.util.List;
+
 public abstract class Expired extends Product{
     private int daysToExpire;//variable for days left until product expires
 
-    public Expired(int id, String name, String description, float price, int daysToExpire, boolean quantityBased) {//constructor
-        super(id, name, description, price, quantityBased);
+    public Expired(int id, String name, String description, float price, int daysToExpire, boolean quantityBased, List<Retailer> retailers) {//constructor
+        super(id, name, description, price, quantityBased, retailers);
         this.daysToExpire = daysToExpire;
     }
 

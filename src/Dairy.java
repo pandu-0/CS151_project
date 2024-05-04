@@ -1,8 +1,10 @@
+import java.util.List;
+
 public class Dairy extends Expired{
     private boolean veganFriendly;//variable for whether item is vegan friendly
 
-    public Dairy(int id, String name, String description, float price, int daysToExpire, boolean veganFriendly, boolean quantityBased) {//constructor
-        super(id, name, description, price, daysToExpire, quantityBased);
+    public Dairy(int id, String name, String description, float price, int daysToExpire, boolean veganFriendly, boolean quantityBased, List<Retailer> retailers) {//constructor
+        super(id, name, description, price, daysToExpire, quantityBased, retailers);
         this.veganFriendly = veganFriendly;
     }
 
