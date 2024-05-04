@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Cart {
     ArrayList<Product> cart;//Initialize cart arraylist
 
-    public Cart(ArrayList<Product> cart) {//constructor
+    public Cart() {//constructor
         this.cart = new ArrayList<>();
     }
 
