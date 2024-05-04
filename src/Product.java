@@ -7,7 +7,7 @@ public abstract class Product {
     private float price;//product price
     List<Retailer> retailers; //List of possible retailers
     private int quantity; //quantity of item
-    private int weight; //weight of item
+    private float weight; //weight of item
 
     private boolean quantityBased;//variable for whether item is quantity or weight based
 
@@ -76,12 +76,20 @@ public abstract class Product {
         this.quantity = quantity;
     }
 
-    public int getWeight() {//get method for weight
+    public float getWeight() {//get method for weight
         return weight;
     }
 
-    public void setWeight(int weight) {//set method for weight
+    public void setWeight(float weight) {//set method for weight
         this.weight = weight;
+    }
+
+    public void changeQuantityWeight(int quantity){//method to change quantity of item
+        this.setQuantity(quantity);
+    }
+
+    public void changeQuantityWeight(float weight){//method to change weight of item
+        this.setWeight(weight);
     }
 
     public abstract float calculatePrice();//abstract method to calculate price item
