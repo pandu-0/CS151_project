@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public class Bakery extends Expired{
     private boolean glutenFree;//variable for whether item is gluten free
@@ -14,5 +14,10 @@ public class Bakery extends Expired{
 
     public void setGlutenFree(boolean glutenFree) {//set method for glutenFree
         this.glutenFree = glutenFree;
+    }
+
+    @Override
+    public float calculatePrice() {//method for calculating price
+        return this.getPrice()*this.getQuantity();
     }
 }

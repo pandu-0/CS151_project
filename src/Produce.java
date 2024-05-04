@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public class Produce extends NonExpired{
     private boolean organic;//variable for whether item is organic
@@ -17,4 +17,8 @@ public class Produce extends NonExpired{
     }
 
 
+    @Override
+    public float calculatePrice() {//method for calculating price
+        return this.getPrice()*this.getWeight();
+    }
 }

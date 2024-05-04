@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public class HouseholdEssentials extends NonExpired{
     private boolean environmentallyFriendly;//variable for whether item is environmentally friendly
@@ -14,5 +14,10 @@ public class HouseholdEssentials extends NonExpired{
 
     public void setEnvironmentallyFriendly(boolean environmentallyFriendly) {//set method for environmentallyFriendly
         this.environmentallyFriendly = environmentallyFriendly;
+    }
+
+    @Override
+    public float calculatePrice() {//method for calculating price
+        return this.getPrice()*this.getQuantity();
     }
 }

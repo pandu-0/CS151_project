@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public abstract class Expired extends Product{
     private int daysToExpire;//variable for days left until product expires
@@ -14,16 +14,6 @@ public abstract class Expired extends Product{
 
     public void setDaysToExpire(int daysToExpire) {//set method for daysToExpire
         this.daysToExpire = daysToExpire;
-    }
-
-    @Override
-    public float calculatePrice(int quantity) {//calculate price for quantity based items
-        return quantity*this.getPrice();
-    }
-
-    @Override
-    public float calculatePrice(float weight) {//calculate price for weight based items
-        return weight*this.getPrice();
     }
 
 

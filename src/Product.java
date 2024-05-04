@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public abstract class Product {
     private int id; //product id
@@ -6,6 +6,8 @@ public abstract class Product {
     private String description;//product description
     private float price;//product price
     List<Retailer> retailers; //List of possible retailers
+    private int quantity; //quantity of item
+    private int weight; //weight of item
 
     private boolean quantityBased;//variable for whether item is quantity or weight based
 
@@ -66,6 +68,21 @@ public abstract class Product {
         this.retailers = retailers;
     }
 
-    public abstract float calculatePrice(int quantity);//abstract method to calculate price for quantity based items
-    public abstract float calculatePrice(float weight);//abstract method to calculate price for weight based items
+    public int getQuantity() {//get method for quantity
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {//set method for quantity
+        this.quantity = quantity;
+    }
+
+    public int getWeight() {//get method for weight
+        return weight;
+    }
+
+    public void setWeight(int weight) {//set method for weight
+        this.weight = weight;
+    }
+
+    public abstract float calculatePrice();//abstract method to calculate price item
 }

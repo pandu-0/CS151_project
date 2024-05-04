@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public class Dairy extends Expired{
     private boolean veganFriendly;//variable for whether item is vegan friendly
@@ -16,4 +16,8 @@ public class Dairy extends Expired{
         this.veganFriendly = veganFriendly;
     }
 
+    @Override
+    public float calculatePrice() {//method for calculating price
+        return this.getPrice()*this.getQuantity();
+    }
 }
