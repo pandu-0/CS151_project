@@ -14,4 +14,13 @@ public class Cart {
     public void removeFromCart(Product p){//method to remove from cart
         cart.remove(p);
     }
+
+    public float total(){//Calculate cart total
+        float total = 0;
+        for(Product product: cart){
+            total = total + product.calculatePrice();
+        }
+
+        return total;
+    }
 }
