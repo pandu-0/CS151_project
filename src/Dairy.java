@@ -20,4 +20,17 @@ public class Dairy extends Expired{
     public float calculatePrice() {//method for calculating price
         return this.getPrice()*this.getQuantity();
     }
+
+    @Override
+    public String toString() {
+        if(veganFriendly) {
+            return super.toString() +
+                    "Vegan Friendly: Yes";
+        }
+        else{
+            return super.toString() +
+                    "Vegan Friendly: No";
+        }
+
+    }
 }

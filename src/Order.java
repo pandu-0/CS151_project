@@ -32,4 +32,12 @@ public class Order extends Payment{
     public int getOrderNumber() {//get method for orderNumber
         return orderNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Order Number:" + orderNumber + "\n" +
+                "Name:" + name + "\n" +
+                "Shipping Address:" + shippingAddress + "\n" +
+                super.toString();
+    }
 }

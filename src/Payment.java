@@ -52,4 +52,14 @@ public class Payment {
     public void setBillingAddress(String billingAddress) {//set method for billingAddress
         this.billingAddress = billingAddress;
     }
+
+    @Override
+    public String toString() {
+        return "Payment info: " +
+                "\t" + "Card Number:" + cardNumber + "\n" +
+                "\t" + "Expiration Date:" + expirationDate + "\n" +
+                "\t" + "CVV:" + cvv + "\n" +
+                "\t" + "Cardholder Name:" + cardHolderName + "\n" +
+                "\t" + "Billing Address:" + billingAddress + "\n";
+    }
 }

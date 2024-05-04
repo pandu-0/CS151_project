@@ -16,5 +16,9 @@ public abstract class Expired extends Product{
         this.daysToExpire = daysToExpire;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Days To Expire:" + daysToExpire + "\n";
+    }
 }

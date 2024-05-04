@@ -20,4 +20,15 @@ public class HouseholdEssentials extends NonExpired{
     public float calculatePrice() {//method for calculating price
         return this.getPrice()*this.getQuantity();
     }
+
+    @Override
+    public String toString() {
+        if (environmentallyFriendly) {
+            return super.toString() +
+                    "Environmentally Friendly: Yes";
+        } else {
+            return super.toString() +
+                    "Environmentally Friendly: No";
+        }
+    }
 }

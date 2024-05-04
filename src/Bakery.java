@@ -20,4 +20,16 @@ public class Bakery extends Expired{
     public float calculatePrice() {//method for calculating price
         return this.getPrice()*this.getQuantity();
     }
+
+    @Override
+    public String toString() {
+        if (glutenFree) {
+            return super.toString() +
+                    "Gluten Free: Yes";
+        } else {
+            return super.toString() +
+                    "Gluten Free: Yes";
+        }
+    }
+
 }

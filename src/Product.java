@@ -93,4 +93,12 @@ public abstract class Product {
     }
 
     public abstract float calculatePrice();//abstract method to calculate price item
+
+    @Override
+    public String toString() {
+        return  "Product name:" + name + "\n" +
+                "Product id:" + id + "\n" +
+                "Description:" + description + "\n" +
+                "Price:" + price + "\n";
+    }
 }

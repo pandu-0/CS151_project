@@ -21,4 +21,15 @@ public class Produce extends NonExpired{
     public float calculatePrice() {//method for calculating price
         return this.getPrice()*this.getWeight();
     }
+
+    @Override
+    public String toString() {
+        if (organic) {
+            return super.toString() +
+                    "Organic: Yes";
+        } else {
+            return super.toString() +
+                    "Organic: No";
+        }
+    }
 }

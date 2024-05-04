@@ -32,4 +32,11 @@ public class Retailer {
     public void setState(String state) {//set method for state
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return  "Retailer name:" + name + "\n" +
+                "City:" + city + "\n" +
+                "State:" + state + "\n" ;
+    }
 }
