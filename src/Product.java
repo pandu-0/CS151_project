@@ -58,6 +58,14 @@ public abstract class Product {
         this.quantityBased = quantityBased;
     }
 
+    public List<Retailer> getRetailers() {
+        return retailers;
+    }
+
+    public void setRetailers(List<Retailer> retailers) {
+        this.retailers = retailers;
+    }
+
     public abstract float calculatePrice(int quantity);//abstract method to calculate price for quantity based items
     public abstract float calculatePrice(float weight);//abstract method to calculate price for weight based items
 }
