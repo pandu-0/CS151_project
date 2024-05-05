@@ -7,9 +7,13 @@ public class Dairy extends Expired{
     private boolean veganFriendly;//variable for whether item is vegan friendly
 
     // constructor
-    public Dairy(int id, String name, String description, float price, int daysToExpire, boolean veganFriendly, boolean quantityBased, List<Retailer> retailers) {
-        super(id, name, description, price, daysToExpire, quantityBased, retailers);
+    public Dairy(int id, String name, String description, float price, int daysToExpire, boolean veganFriendly, int retailer_id) {
+        super(id, name, description, price, daysToExpire, retailer_id);
         this.veganFriendly = veganFriendly;
+    }
+
+    public Dairy() {
+
     }
 
     public boolean isVeganFriendly() {//get method for veganFriendly
@@ -29,11 +33,11 @@ public class Dairy extends Expired{
     public String toString() {
         if(veganFriendly) {
             return super.toString() +
-                    "Vegan Friendly: Yes";
+                    "Vegan Friendly: Yes\t";
         }
         else{
             return super.toString() +
-                    "Vegan Friendly: No";
+                    "Vegan Friendly: No\t";
         }
 
     }

@@ -8,20 +8,21 @@ public abstract class Product {
     private String name; // product name
     private String description; // product description
     private float price; // product price
-    List<Retailer> retailers; // List of possible retailers
+    int retailer_id; // List of possible retailers
     private int quantity; // quantity being purchased
     private float weight; // weight of item
 
-    private boolean quantityBased; // variable for whether item is quantity or weight based
-
     // constructor
-    public Product(int id, String name, String description, float price, boolean quantityBased, List<Retailer> retailers) {
+    public Product(int id, String name, String description, float price, int retailer_id) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.quantityBased = quantityBased;
-        this.retailers = retailers;
+        this.retailer_id = retailer_id;
+    }
+
+    public Product() {
+
     }
 
     public int getId() {//get method for id
@@ -56,27 +57,19 @@ public abstract class Product {
         this.price = price;
     }
 
-    public boolean isQuantityBased() {
-        return quantityBased;
+    public int getRetailer_id() {
+        return this.retailer_id;
     }
 
-    public void setQuantityBased(boolean quantityBased) {
-        this.quantityBased = quantityBased;
-    }
-
-    public List<Retailer> getRetailers() {
-        return retailers;
-    }
-
-    public void setRetailers(List<Retailer> retailers) {
-        this.retailers = retailers;
+    public void setRetailer_id(int retailer_id) {
+        this.retailer_id = retailer_id;
     }
 
     public int getQuantity() {//get method for quantity
         return quantity;
     }
 
-    public void setQuantity(int quantity) {//set method for quantity
+    public void setQuantity(int quantity) { //set method for quantity
         this.quantity = quantity;
     }
 
@@ -100,12 +93,14 @@ public abstract class Product {
 
     @Override
     public String toString() {
+
         return String.format(
-                "Product name: %s\nProduct id: %d\nDescription: %s\nPrice: $%.2f\n",
+                "Product name: %s\tid: %d\tDescription: %s\tPrice: $%.2f\tQuantity: %d\t",
                 this.name,
                 this.id,
                 this.description,
-                this.price
+                this.calculatePrice(),
+                this.quantity
         );
     }
 }

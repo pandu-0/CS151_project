@@ -1,14 +1,11 @@
 package Purchasable;
 
-import java.util.*;
-import Billing.Retailer;
-
 public class Bakery extends Expired{
     private boolean glutenFree;//variable for whether item is gluten free
 
     //constructor
-    public Bakery(int id, String name, String description, float price, int daysToExpire, boolean quantityBased, boolean glutenFree, List<Retailer> retailers) {
-        super(id, name, description, price, daysToExpire, quantityBased,  retailers);
+    public Bakery(int id, String name, String description, float price, int daysToExpire, boolean glutenFree, int retailer_id) {
+        super(id, name, description, price, daysToExpire,  retailer_id);
         this.glutenFree = glutenFree;
     }
 
@@ -21,14 +18,14 @@ public class Bakery extends Expired{
     }
 
     @Override
-    public float calculatePrice() {//method for calculating price
+    public float calculatePrice() { // method for calculating price
         return this.getPrice()*this.getQuantity();
     }
 
     @Override
     public String toString() {
 //        if gluten-free return yes, otherwise no.
-        return super.toString() + (glutenFree ?  "Gluten Free: Yes" : "Gluten Free: No");
+        return super.toString() + (glutenFree ?  "Gluten Free: Yes" : "Gluten Free: No") + "\t";
     }
 
 }

@@ -1,5 +1,371 @@
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import Billing.Cart;
+import Billing.Order;
+import Inventory.DatabaseConnection;
+import Inventory.ShoppingExceptions.InvalidProductIdException;
+import Inventory.ShoppingExceptions.InvalidRetailerException;
+import Inventory.ShoppingExceptions.OutOfStockException;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        try {
+            Cart cart = new Cart();
+
+            welcome();
+
+            startShopping(cart);
+
+            proceedToCart(cart);
+
+            while (!wantsToCheckout()) {
+                if (wantsToLeave()) {
+                    System.exit(0);
+                } else {
+                    startShopping(cart);
+                    proceedToCart(cart);
+                }
+            }
+
+            checkout(cart);
+
+            System.out.println("Cya :)");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    private static boolean wantsToLeave() throws InterruptedException {
+        String answer = null;
+
+        List<String> correctAnswers = Arrays.asList("Yes", "No");
+
+        do {
+            Scanner input = new Scanner(System.in);
+            TimeUnit.SECONDS.sleep(1);
+            System.out.print("Would you like to exit the application (your cart will be lost)? [Type: Yes/No]: ");
+            answer = input.nextLine();
+
+            if (!correctAnswers.contains(answer)) {
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println("Invalid answer. Enter Correctly!");
+            }
+
+        } while (!correctAnswers.contains(answer));
+
+        return answer.equals("Yes");
+    }
+
+    private static void startShopping(Cart cart) throws InterruptedException{
+        do {
+            browse(cart);
+        } while (wantsToContinueShopping());
+    }
+
+    private static boolean wantsToCheckout() throws InterruptedException {
+        String answer = null;
+
+        List<String> correctAnswers = Arrays.asList("Yes", "No");
+
+        do {
+            Scanner input = new Scanner(System.in);
+            TimeUnit.SECONDS.sleep(1);
+            System.out.print("Would you like to checkout? [Type: Yes/No]: ");
+            answer = input.nextLine();
+
+            if (!correctAnswers.contains(answer)) {
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println("Invalid answer. Enter Correctly!");
+            }
+
+        } while (!correctAnswers.contains(answer));
+
+        return answer.equals("Yes");
+    }
+
+    private static void checkout(Cart cart) throws InterruptedException {
+        Scanner input = new Scanner(System.in);
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println();
+        System.out.println("Let's proceed to checkout!");
+        System.out.println();
+
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("Please enter billing information below");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.print("Credit Card Number: ");
+        String creditCardNumber = input.nextLine();
+        TimeUnit.SECONDS.sleep(1);
+
+        System.out.print("Expiry date: ");
+        String expirationDate = input.nextLine();
+        TimeUnit.SECONDS.sleep(1);
+
+        System.out.print("CVV: ");
+        int cvv = input.nextInt();
+        input.nextLine();
+        TimeUnit.SECONDS.sleep(1);
+
+        System.out.print("Card Holder Name: ");
+        String cardHolderName = input.nextLine();
+        TimeUnit.SECONDS.sleep(1);
+
+        System.out.print("Billing Address: ");
+        String billingAddress = input.nextLine();
+        TimeUnit.SECONDS.sleep(1);
+
+        System.out.print("Shipping Address: ");
+        String shippingAddress = input.nextLine();
+        TimeUnit.SECONDS.sleep(1);
+
+        System.out.print("Recipient's Name: ");
+        String recipientName = input.nextLine();
+        System.out.println();
+        TimeUnit.SECONDS.sleep(1);
+
+        Order od = new Order(creditCardNumber, expirationDate, cvv, cardHolderName, billingAddress, shippingAddress, recipientName);
+
+        System.out.println(od);
+        System.out.println();
+        TimeUnit.SECONDS.sleep(2);
+
+        System.out.println("Order has been place!");
+
+        TimeUnit.SECONDS.sleep(1);
+        new DatabaseConnection().update(cart);
+
+    }
+
+    private static void proceedToCart(Cart cart) throws InterruptedException {
+
+        System.out.println(
+                """
+                Let's get you checked out!
+                
+                Here's the list of items in your cart:
+                """
+        );
+
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println(cart);
+        System.out.println();
+
+        TimeUnit.SECONDS.sleep(2);
+
+        if (cart.getCartSize() > 0) {
+            while (wantsToRemoveAnItem()) {
+                removeItemFromCart(cart);
+            }
+            ;
+        }
+
+    }
+
+    private static void removeItemFromCart(Cart cart) throws InterruptedException {
+        if (cart.getCartSize() == 0) {
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Cart is empty :(");
+            System.out.println();
+            return;
+        }
+
+        Scanner input = new Scanner(System.in);
+        while (true){
+            TimeUnit.SECONDS.sleep(1);
+            System.out.print("Enter the ID of the Product you want to remove: ");
+            int p_id = input.nextInt();
+
+            if (!cart.contains(p_id)) {
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println("Invalid answer. Enter Correctly!");
+            } else {
+                cart.removeFromCart(p_id);
+                break;
+            }
+        }
+
+        TimeUnit.SECONDS.sleep(2);
+        System.out.print("Successfully removed Product from Cart!");
+        System.out.println();
+
+        TimeUnit.SECONDS.sleep(2);
+        System.out.print("Here's the updated Cart:");
+        System.out.println(cart);
+        System.out.println();
+
+
+
+    }
+
+    private static boolean wantsToRemoveAnItem() throws InterruptedException {
+        String answer = null;
+
+        List<String> correctAnswers = Arrays.asList("Yes", "No");
+
+        Scanner input = new Scanner(System.in);
+
+        do {
+            TimeUnit.SECONDS.sleep(1);
+            System.out.print("Would you like to remove a Product from Cart? [Type: Yes/No (Enter Exactly!)]: ");
+            answer = input.nextLine();
+
+            if (!correctAnswers.contains(answer)) {
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println("Invalid answer. Enter Correctly!");
+            }
+
+        } while (!correctAnswers.contains(answer));
+
+
+
+        return answer.equals("Yes");
+    }
+
+    private static boolean wantsToContinueShopping() throws InterruptedException {
+        String answer = null;
+
+        List<String> correctAnswers = Arrays.asList("Yes", "No");
+
+        Scanner input = new Scanner(System.in);
+
+        do {
+            System.out.print("Would you like to continue shopping? [Type: Yes/No]: ");
+            answer = input.nextLine();
+
+            if (!correctAnswers.contains(answer)) {
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println("Invalid answer. Enter Correctly!");
+            }
+
+        } while (!correctAnswers.contains(answer));
+
+
+
+        return answer.equals("Yes");
+
+    }
+
+    private static void welcome() {
+        try {
+            TimeUnit.SECONDS.sleep(2);
+            System.out.println("Hi!!");
+            TimeUnit.SECONDS.sleep(2);
+            System.out.println("Welcome to the Grocery Marketplace! :)\n");
+            TimeUnit.SECONDS.sleep(2);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //    helper to check if category is valid
+    public static boolean validateCategory(String category) {
+        List<String> categories = Arrays.asList("Dairy", "Bakery", "HouseHoldEssentials", "Produce", "Product");
+
+        return categories.contains(category);
+    }
+
+    public static String askForCategory() {
+
+        String category = null;
+
+        Scanner input = new Scanner(System.in);
+
+        try {
+            System.out.println("What category of Products would you like to browse today?");
+            System.out.print(
+                    """
+                    Categories:
+                        1. Dairy
+                        2. Bakery
+                        3. House Hold
+                        4. Produce
+                    """
+            );
+
+            TimeUnit.SECONDS.sleep(2);
+            System.out.print("Enter the Category Name you want to browse exactly as you see it in the list: ");
+            category = input.nextLine();
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+        return category;
+    }
+
+    public static void browse(Cart cart) {
+        try {
+            String category = null;
+
+            while (true) {
+                category = askForCategory();
+
+                if (category.equals("House Hold")) {
+                    category = "HouseHoldEssentials";
+                }
+
+                if (validateCategory(category)) {
+                    break;
+                } else {
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println("!!Please enter a valid category!!");
+                }
+                    TimeUnit.SECONDS.sleep(2);
+            }
+
+            System.out.println("Understood!");
+            TimeUnit.SECONDS.sleep(2);
+
+//          print the products desired
+            DatabaseConnection inventory = new DatabaseConnection();
+            inventory.listProducts(category);
+            TimeUnit.SECONDS.sleep(2);
+
+            System.out.print(
+                    """
+                    Which Product would you like to purchase?
+                    Enter id of Product exactly:\s"""
+            );
+
+            Scanner input = new Scanner(System.in);
+            int productId = input.nextInt();
+            TimeUnit.SECONDS.sleep(1);
+            inventory.validateProductId(productId, category);
+
+            inventory.showRetailers(productId);
+            TimeUnit.SECONDS.sleep(1);
+
+            System.out.print("Enter the ID of the retailer you would like to purchase from: ");
+            int retailerId = input.nextInt();
+            inventory.validateRetailerId(retailerId, productId);
+
+            System.out.print("Enter how many would you like to purchase: ");
+            int quantity = input.nextInt();
+            inventory.validateQuantity(productId, retailerId, quantity);
+
+            TimeUnit.SECONDS.sleep(2);
+            inventory.addToCart(retailerId, productId, quantity, category, cart);
+            TimeUnit.SECONDS.sleep(1);
+
+            System.out.println("Understood! ;)\nAdding them to cart!\n");
+            System.out.println("The following items have been added to cart!");
+
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println(cart);
+            System.out.println();
+
+        } catch (OutOfStockException | InvalidRetailerException | InvalidProductIdException e) {
+            System.out.println(e.getMessage());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }
