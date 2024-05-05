@@ -6,9 +6,11 @@ import Billing.Retailer;
 public class Produce extends NonExpired{
     private boolean organic;//variable for whether item is organic
 
-    public Produce(int id, String name, String description, float price, boolean quantityBased, boolean organic, List<Retailer> retailers) {//constructor
-        super(id, name, description, price, quantityBased, retailers);
+    // constructor
+    public Produce(int id, String name, String description, float price, boolean organic, float weight, int retailer_id) {
+        super(id, name, description, price, retailer_id);
         this.organic = organic;
+        this.setWeight(weight);
     }
 
     public boolean isOrganic() {//get method for organic
@@ -22,17 +24,17 @@ public class Produce extends NonExpired{
 
     @Override
     public float calculatePrice() {//method for calculating price
-        return this.getPrice()*this.getWeight();
+        return this.getPrice()*this.getWeight()*this.getQuantity();
     }
 
     @Override
     public String toString() {
         if (organic) {
             return super.toString() +
-                    "Organic: Yes";
+                    "Organic: Yes\t";
         } else {
             return super.toString() +
-                    "Organic: No";
+                    "Organic: No\t";
         }
     }
 }

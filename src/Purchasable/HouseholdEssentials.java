@@ -7,8 +7,8 @@ public class HouseholdEssentials extends NonExpired{
     private boolean environmentallyFriendly;//variable for whether item is environmentally friendly
 
     // constructor
-    public HouseholdEssentials(int id, String name, String description, float price, boolean quantityBased, boolean environmentallyFriendly, List<Retailer> retailers) {
-        super(id, name, description, price, quantityBased, retailers);
+    public HouseholdEssentials(int id, String name, String description, float price, boolean environmentallyFriendly, int retailer_id) {
+        super(id, name, description, price, retailer_id);
         this.environmentallyFriendly = environmentallyFriendly;
     }
 
@@ -29,10 +29,10 @@ public class HouseholdEssentials extends NonExpired{
     public String toString() {
         if (environmentallyFriendly) {
             return super.toString() +
-                    "Environmentally Friendly: Yes";
+                    "Environmentally Friendly: Yes\t";
         } else {
             return super.toString() +
-                    "Environmentally Friendly: No";
+                    "Environmentally Friendly: No\t";
         }
     }
 }

@@ -4,13 +4,13 @@ public class Order extends Payment{
     private String shippingAddress;//address where order should be delivered
     private String name;//name of person order should be delivered to
 
-    private final int orderNumber;
+    private final int  orderNumber;
 
     public Order(String creditCardNumber, String expirationDate, int cvv, String cardHolderName, String billingAddress, String shippingAddress, String name) {//constructor
         super(creditCardNumber, expirationDate, cvv, cardHolderName, billingAddress);
         this.shippingAddress = shippingAddress;
         this.name = name;
-        this.orderNumber = this.hashCode();
+        this.orderNumber = Math.abs(this.hashCode());
     }
 
     public String getShippingAddress() {//get method for shippingAddress
@@ -30,14 +30,14 @@ public class Order extends Payment{
     }
 
     public int getOrderNumber() {//get method for orderNumber
-        return orderNumber;
+        return this.orderNumber;
     }
 
     @Override
     public String toString() {
-        return "Order Number:" + orderNumber + "\n" +
-                "Name:" + name + "\n" +
-                "Shipping Address:" + shippingAddress + "\n" +
+        return "Order Number: " + orderNumber + "\n" +
+                "Name: " + name + "\n" +
+                "Shipping Address: " + shippingAddress + "\n" +
                 super.toString();
     }
 

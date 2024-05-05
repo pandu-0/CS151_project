@@ -57,11 +57,11 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment info: " +
-                "\t" + "Card Number:" + cardNumber + "\n" +
-                "\t" + "Expiration Date:" + expirationDate + "\n" +
-                "\t" + "CVV:" + cvv + "\n" +
-                "\t" + "Cardholder Name:" + cardHolderName + "\n" +
-                "\t" + "Billing Address:" + billingAddress + "\n";
+        return "Payment info:\n" +
+                "\t" + "Card Number: " + cardNumber + "\n" +
+                "\t" + "Expiration Date: " + expirationDate + "\n" +
+                "\t" + "CVV: " + cvv + "\n" +
+                "\t" + "Cardholder Name: " + cardHolderName + "\n" +
+                "\t" + "Billing Address: " + billingAddress + "\n";
     }
 }
