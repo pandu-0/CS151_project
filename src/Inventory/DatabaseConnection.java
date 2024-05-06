@@ -151,7 +151,6 @@ public class DatabaseConnection {
             e.printStackTrace(System.err);
         }
 
-
     }
 
     public void listProducts(String tableName) {

@@ -61,7 +61,8 @@ INSERT INTO Retailer (id, name, city, state, product_id, quantity_available)
 VALUES 
     (5, 'Harvest Haven', 'Milpitas', 'CA', 12, 7),
     (6, 'Dietary Depot', 'Union City', 'CA', 12, 9),
-    (7, 'Bountiful Basket', 'Sunnyvale', 'CA', 12, 13);
+    (7, 'Bountiful Basket', 'Sunnyvale', 'CA', 12, 13),
+    (8, "House of Bagels", 'San Jose', "CA", 12, 30);
 
 -- Inserting into Product, Produce, and Retailer Tables
 INSERT INTO Product (id, name, description, price) VALUES (5, 'Apple', 'Fresh apple', 0.99);
