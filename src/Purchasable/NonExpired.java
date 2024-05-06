@@ -1,7 +1,6 @@
 package Purchasable;
 
 import java.util.*;
-import Billing.Retailer;
 
 public abstract class NonExpired extends Product {
 

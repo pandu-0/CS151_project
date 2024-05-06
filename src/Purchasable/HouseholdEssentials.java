@@ -1,7 +1,6 @@
 package Purchasable;
 
 import java.util.*;
-import Billing.Retailer;
 
 public class HouseholdEssentials extends NonExpired{
     private boolean environmentallyFriendly;//variable for whether item is environmentally friendly

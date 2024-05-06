@@ -1,7 +1,6 @@
 package Purchasable;
 
 import java.util.*;
-import Billing.Retailer;
 
 public class Produce extends NonExpired{
     private boolean organic;//variable for whether item is organic

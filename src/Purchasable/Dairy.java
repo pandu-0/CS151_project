@@ -1,7 +1,6 @@
 package Purchasable;
 
 import java.util.List;
-import Billing.Retailer;
 
 public class Dairy extends Expired{
     private boolean veganFriendly;//variable for whether item is vegan friendly

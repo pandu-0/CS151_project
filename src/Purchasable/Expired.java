@@ -1,7 +1,7 @@
 package Purchasable;
 
 import java.util.*;
-import Billing.Retailer;
+
 
 public abstract class Expired extends Product{
     private int daysToExpire;//variable for days left until product expires
