@@ -44,7 +44,7 @@ public class DatabaseConnection {
     }
 
     public void addToCart(int r_id, int p_id, int quantity, String category, Cart cart) throws OutOfStockException {
-        System.out.println("cat: " + category);
+//        System.out.println("cat: " + category);
         try ( Statement statement = connect().createStatement();) {
 
             String otherAttributes = getCategoryAttributes(category);
