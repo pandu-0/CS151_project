@@ -327,7 +327,6 @@ public class Main {
 
             System.out.println("Understood!");
             TimeUnit.SECONDS.sleep(2);
-            clearScreen();
 
 //          print the products desired
             DatabaseConnection inventory = new DatabaseConnection();
@@ -347,7 +346,6 @@ public class Main {
 
             System.out.println("Understood!");
             TimeUnit.SECONDS.sleep(2);
-            clearScreen();
 
             inventory.showRetailers(productId);
             TimeUnit.SECONDS.sleep(1);
