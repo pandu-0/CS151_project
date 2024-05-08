@@ -9,16 +9,20 @@ import Inventory.ShoppingExceptions.InvalidRetailerException;
 import Inventory.ShoppingExceptions.OutOfStockException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) { // this is where the program start to run
         try {
-            Cart cart = new Cart();
+            Cart cart = new Cart(); // create a new cart for the user
 
-            welcome();
+            welcome(); // greeting helper
 
-            startShopping(cart);
+            clearScreen();
 
-            proceedToCart(cart);
+            startShopping(cart); // get them shopping
 
+            proceedToCart(cart); // once they say "No" to the previous method that asks them if they want to
+                                // continue shopping, we proceed to cart.
+
+            // keep them shopping or ask them to close for as long as they do not want to checkout
             while (!wantsToCheckout()) {
                 if (wantsToLeave()) {
                     System.exit(0);
@@ -28,6 +32,7 @@ public class Main {
                 }
             }
 
+//            get them checked out
             checkout(cart);
 
             System.out.println("Cya :)");
@@ -37,6 +42,7 @@ public class Main {
         }
     }
 
+//    ask if they want to exit the application
     private static boolean wantsToLeave() throws InterruptedException {
         String answer = null;
 
@@ -58,12 +64,14 @@ public class Main {
         return answer.equals("Yes");
     }
 
+    //    for as long as they want to continue shopping, keep them browsing the menu
     private static void startShopping(Cart cart) throws InterruptedException{
         do {
             browse(cart);
         } while (wantsToContinueShopping());
     }
 
+    //    ask if they want to check out
     private static boolean wantsToCheckout() throws InterruptedException {
         String answer = null;
 
@@ -85,6 +93,7 @@ public class Main {
         return answer.equals("Yes");
     }
 
+//    ask them to enter billing information to check out and place order
     private static void checkout(Cart cart) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         TimeUnit.SECONDS.sleep(2);
@@ -138,6 +147,7 @@ public class Main {
 
     }
 
+//    proceed to cart and ask if they want to remove an item from cart
     private static void proceedToCart(Cart cart) throws InterruptedException {
 
         System.out.println(
@@ -163,6 +173,7 @@ public class Main {
 
     }
 
+//    remove item requested from cart
     private static void removeItemFromCart(Cart cart) throws InterruptedException {
         if (cart.getCartSize() == 0) {
             TimeUnit.SECONDS.sleep(1);
@@ -195,10 +206,9 @@ public class Main {
         System.out.println(cart);
         System.out.println();
 
-
-
     }
 
+    //    ask if they want to remove an item from cart
     private static boolean wantsToRemoveAnItem() throws InterruptedException {
         String answer = null;
 
@@ -223,6 +233,7 @@ public class Main {
         return answer.equals("Yes");
     }
 
+    //    ask if they want to continue shopping
     private static boolean wantsToContinueShopping() throws InterruptedException {
         String answer = null;
 
@@ -247,6 +258,7 @@ public class Main {
 
     }
 
+//    print greeting
     private static void welcome() {
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -266,6 +278,7 @@ public class Main {
         return categories.contains(category);
     }
 
+//    ask which category of products to browse
     public static String askForCategory() {
 
         String category = null;
@@ -293,11 +306,10 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-
-
         return category;
     }
 
+//    browse the category (print products in it) and add them to cart
     public static void browse(Cart cart) {
         try {
             String category = null;
@@ -320,6 +332,7 @@ public class Main {
 
             System.out.println("Understood!");
             TimeUnit.SECONDS.sleep(2);
+            clearScreen();
 
 //          print the products desired
             DatabaseConnection inventory = new DatabaseConnection();
@@ -336,6 +349,10 @@ public class Main {
             int productId = input.nextInt();
             TimeUnit.SECONDS.sleep(1);
             inventory.validateProductId(productId, category);
+
+            System.out.println("Understood!");
+            TimeUnit.SECONDS.sleep(2);
+            clearScreen();
 
             inventory.showRetailers(productId);
             TimeUnit.SECONDS.sleep(1);
@@ -366,6 +383,13 @@ public class Main {
         }
 
     }
+
+    // helper to clear screen
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
 
 
 }

@@ -12,26 +12,31 @@ import Purchasable.Product;
 import java.sql.*;
 
 public class DatabaseConnection {
+
+//    Helper method to connect to the database
     public Connection connect() {
 
         String url = "jdbc:sqlite:src/Inventory/inventory.db"; // Change the path to your database file
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return conn;
     }
 
+//    update the product quantity available in the database after the user places an order
     public void update(Cart cart) {
-        for (Product p : cart.getCartList()) {
+
+        for (Product p : cart.getCartList()) { // update quantity available for each product in the car
+
             String query = String.format("""
                 UPDATE Retailer
                 SET quantity_available = quantity_available - %d
                 WHERE Retailer.id = %d AND Retailer.product_id = %d;
                 """, p.getQuantity(), p.getRetailer_id(), p.getId());
+
             try (Statement statement = connect().createStatement()){
                 statement.execute(query);
             } catch (SQLException e) {
@@ -42,7 +47,10 @@ public class DatabaseConnection {
 
         System.out.println("Inventory Updated!");
     }
-
+/*
+    query the database to get the full products attributes.
+    Make a Product object using the attributes and add it to the cart object
+ */
     public void addToCart(int r_id, int p_id, int quantity, String category, Cart cart) throws OutOfStockException {
 //        System.out.println("cat: " + category);
         try ( Statement statement = connect().createStatement();) {
@@ -107,6 +115,8 @@ public class DatabaseConnection {
         }
     }
 
+//    Helper
+//    get the attributes of the category
     private String getCategoryAttributes(String category) {
         return switch (category) {
             case "Dairy" -> "veganFriendly,daysToExpire";
@@ -116,6 +126,7 @@ public class DatabaseConnection {
         };
     }
 
+//    query the database and print the retailers in the database for the requested product_id
     public void showRetailers(int productId) {
 
         try ( Statement statement = connect().createStatement();) {
@@ -153,6 +164,7 @@ public class DatabaseConnection {
 
     }
 
+//        queries the database to check whether the Retailer id and product id user inputs are valid
     public void listProducts(String tableName) {
 
         try (Statement statement = connect().createStatement();) {
@@ -194,6 +206,7 @@ public class DatabaseConnection {
         }
     }
 
+//        queries the database to check whether the Retailer id and product id user inputs are valid
     public void validateQuantity(int p_id, int r_id, int quantity) throws OutOfStockException {
 
         try (Statement statement = connect().createStatement()) {
@@ -213,6 +226,7 @@ public class DatabaseConnection {
         }
     }
 
+    //    queries the database to check whether the product id user inputs are valid
     public void validateProductId(int p_id, String category)  throws InvalidProductIdException {
         try (Statement statement = connect().createStatement()) {
 
@@ -234,6 +248,7 @@ public class DatabaseConnection {
         }
     }
 
+//    queries the database to check whether the Retailer id that user inputs is valid
     public void validateRetailerId(int r_id, int p_id) throws InvalidRetailerException {
 
         try (Statement statement = connect().createStatement()) {
