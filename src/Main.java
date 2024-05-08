@@ -15,14 +15,12 @@ public class Main {
 
             welcome(); // greeting helper
 
-            clearScreen();
-
             startShopping(cart); // get them shopping
 
             proceedToCart(cart); // once they say "No" to the previous method that asks them if they want to
                                 // continue shopping, we proceed to cart.
 
-            // keep them shopping or ask them to close for as long as they do not want to checkout
+            // keep them shopping or ask them to close for as long as they do not want to check out
             while (!wantsToCheckout()) {
                 if (wantsToLeave()) {
                     System.exit(0);
@@ -168,7 +166,6 @@ public class Main {
             while (wantsToRemoveAnItem()) {
                 removeItemFromCart(cart);
             }
-            ;
         }
 
     }
@@ -227,8 +224,6 @@ public class Main {
             }
 
         } while (!correctAnswers.contains(answer));
-
-
 
         return answer.equals("Yes");
     }
@@ -383,13 +378,6 @@ public class Main {
         }
 
     }
-
-    // helper to clear screen
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
 
 
 }
