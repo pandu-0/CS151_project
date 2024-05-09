@@ -17,7 +17,7 @@
 1. Download this Repository as a [**zip**](https://github.com/pandu-0/CS151_project/archive/refs/heads/main.zip) file and **extract** it
 2. Open your preferred command prompt application. We used `Terminal` in Mac
 3. Change current working directory using `cd` to the **zip** file you just extracted
-4. run the command below
+4. Run the command below to start the program
 
 ```shell
 java -classpath out/production/CS151_project:src/Inventory/sqlite-jdbc-3.45.3.0.jar:src/Inventory/slf4j-api-2.0.13.jar:src/Inventory/slf4j-simple-2.0.7.jar Main
