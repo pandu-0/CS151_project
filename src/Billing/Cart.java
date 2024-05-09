@@ -50,7 +50,7 @@ public class Cart {
             sb.append(p.toString());
             sb.append("\n");
         }
-        sb.append("\nCart Total: ").append(total());
+        sb.append("\nCart Total: $").append(total());
         return sb.toString();
     }
 
