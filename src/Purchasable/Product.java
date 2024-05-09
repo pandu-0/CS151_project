@@ -94,7 +94,7 @@ public abstract class Product {
     public String toString() {
 
         return String.format(
-                "Product name: %s\tid: %d\tDescription: %s\tPrice: $%.2f\tQuantity: %d\t",
+                "Product\nname: %s\n\tid: %d\n\tDescription: %s\n\tPrice: $%.2f\n\tQuantity: %d\n\t",
                 this.name,
                 this.id,
                 this.description,
