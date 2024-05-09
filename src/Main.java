@@ -9,7 +9,7 @@ import Inventory.ShoppingExceptions.InvalidRetailerException;
 import Inventory.ShoppingExceptions.OutOfStockException;
 
 public class Main {
-    public static void main(String[] args) { // this is where the program start to run
+    public static void main(String[] args) { // this is where the program starts to run
         try {
             Cart cart = new Cart(); // create a new cart for the user
 
