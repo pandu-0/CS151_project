@@ -16,7 +16,7 @@
 
 1. Download this Repository as a [**zip**](https://github.com/pandu-0/CS151_project/archive/refs/heads/main.zip) file and **extract** it
 2. Open your preferred command prompt application. We used `Terminal` in Mac
-3. Change current working directory using `cd` to the **zip** file you just extracted
+3. Change current working directory using the `cd` command to the folder extracted from the **zip**
 4. Run the command below to start the program
 
 ```shell
